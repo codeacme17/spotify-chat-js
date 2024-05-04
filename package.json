@@ -17,6 +17,7 @@
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "langchain": "^0.1.36",
-    "spotify-api.js": "^9.2.5"
+    "spotify-api.js": "^9.2.5",
+    "zod": "^3.23.6"
   }
 }
