@@ -1,0 +1,11 @@
+node_modules
+.bun
+.cache
+.env
+
+test
+dist
+docs
+examples
+plugins
+tmp

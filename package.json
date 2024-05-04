@@ -2,10 +2,18 @@
   "name": "spotify-chat-js",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "bun --watch run index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "langchain": "^0.1.36",
+    "spotify-api.js": "^9.2.5"
   }
 }
