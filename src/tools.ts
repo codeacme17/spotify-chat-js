@@ -1,5 +1,17 @@
-import { startPlayingSongByLyrics } from "./spodify";
+import { startPlayingSongByLyrics, findSongByName, skipNext } from "./spodify";
 import { DynamicTool } from "langchain/tools";
+
+const skipNextTool = new DynamicTool({
+  name: "skipNext",
+  description: "Skip to the next song",
+  func: () => skipNext()
+})
+
+const findSongByNameTool = new DynamicTool({
+  name: "findSongByName",
+  description: "Find a song by its name, and return its URI",
+  func: (input: string) => findSongByName(input)
+})
 
 const startPlayingSongByLyricsTool = new DynamicTool({
   name: "startPlayingSongByLyrics",
@@ -7,4 +19,4 @@ const startPlayingSongByLyricsTool = new DynamicTool({
   func: (input: string) => startPlayingSongByLyrics(input)
 })
 
-export const tools = [startPlayingSongByLyricsTool]
+export const tools = [startPlayingSongByLyricsTool, findSongByNameTool, skipNextTool]

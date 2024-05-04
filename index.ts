@@ -1,9 +1,15 @@
+import { agentExecutor } from "./src/agent";
+import { skipNext } from "./src/spodify";
 import "dotenv/config";
 
-import { agentExecutor } from "./src/agent";
+await skipNext()
 
-const res = await agentExecutor.invoke({
-  input: "start play song with lyrics: 'I'm feeling good'",
-})
+// const res = await agentExecutor.invoke({
+//   input: "plz skip to next song",
+// })
 
-console.log(res);
+// console.log(res);
+
+
+
+
