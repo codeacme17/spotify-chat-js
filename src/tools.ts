@@ -1,4 +1,4 @@
-import { findSongByLyrics, findSongByName, skipNext } from './spodify';
+import { findUriByLyrics, findSongByName, skipNext } from './spodify';
 import { DynamicStructuredTool, DynamicTool } from 'langchain/tools';
 import { z } from 'zod';
 
@@ -9,21 +9,21 @@ const skipNextTool = new DynamicTool({
   returnDirect: true,
 });
 
-const findSongByNameTool = new DynamicTool({
+const findUriByNameTool = new DynamicTool({
   name: 'findSongByName',
-  description: 'Find a song by its name, and return its URI',
+  description: 'Use a song name to find a song uri',
   func: (input: string) => findSongByName(input),
   returnDirect: true,
 });
 
-const findSongByLyricsTool = new DynamicStructuredTool({
-  name: 'findSongByLyrics',
-  description: 'use lyrics to find a song uri',
+const findUriByLyricsTool = new DynamicStructuredTool({
+  name: 'findUriByLyrics',
+  description: 'Use lyrics to find a song uri',
   schema: z.object({
     lyrics: z.string().describe("lyrics in the user's request"),
   }),
   returnDirect: true,
-  func: ({ lyrics }) => findSongByLyrics(lyrics),
+  func: ({ lyrics }) => findUriByLyrics(lyrics),
 });
 
-export const tools = [findSongByLyricsTool];
+export const tools = [findUriByLyricsTool, findUriByNameTool];

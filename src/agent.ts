@@ -1,8 +1,13 @@
 import { AzureChatOpenAI } from '@langchain/azure-openai';
 import { pull } from 'langchain/hub';
-import { AgentExecutor, createReactAgent } from 'langchain/agents';
+import {
+  AgentExecutor,
+  createOpenAIFunctionsAgent,
+  createOpenAIToolsAgent,
+  createReactAgent,
+} from 'langchain/agents';
 import { tools } from './tools';
-import type { PromptTemplate } from 'langchain/prompts';
+import type { ChatPromptTemplate, PromptTemplate } from 'langchain/prompts';
 
 const AZURE_ENDPOINT = process.env.AZURE_ENDPOINT;
 const AZURE_API_KEY = process.env.AZURE_API_KEY;
@@ -27,4 +32,5 @@ export const agentExecutor = new AgentExecutor({
   agent,
   tools,
   maxIterations: 3,
+  verbose: true,
 });

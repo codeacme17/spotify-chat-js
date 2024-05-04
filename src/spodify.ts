@@ -21,7 +21,7 @@ export const skipNext = async () => {
   return 'Skipped to next song';
 };
 
-export const findSongByLyrics = async (lyrics: string) => {
+export const findUriByLyrics = async (lyrics: string) => {
   try {
     const res = await sdk.search(`lyrics:${lyrics}`, ['track']);
     console.log(res.tracks.items[0].uri);
