@@ -22,8 +22,23 @@ const response = await fetch('https://accounts.spotify.com/api/token', {
 const { access_token } = await response.json();
 
 const client = new Spotify.Client({token: access_token});
+const player = new Spotify.Player(client)
 
-export const findSongByLyrics = async (lyrics: string) => {
+export const startPlayingSongByLyrics= async (lyrics: string) => {
+  try {
+    const songURI = await _findSongByLyrics(lyrics);
+
+    if(!songURI) throw new Error("Song not found");
+    
+    await player.play({ contextURI: songURI });
+    return `Started playing song with lyrics: ${lyrics}`
+  } catch (error) {
+    console.error(error);
+    return "Failed to start playing song";
+  }
+}
+
+const _findSongByLyrics = async (lyrics: string) => {
   try {
     const res = await client.search(`lyrics:${lyrics}`, {types: ['track']});
 
@@ -36,4 +51,3 @@ export const findSongByLyrics = async (lyrics: string) => {
     console.error(error);
   }
 }
-
