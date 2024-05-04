@@ -13,30 +13,22 @@ const sdk = SpotifyApi.withClientCredentials(
   ['playlist-modify-public', 'user-modify-playback-state']
 );
 
-console.log("sdk.currentUser", sdk.currentUser.tracks.hasSavedTracks(["3cQO7jp5S9qLBoIVtbkSM1"]));
-
 export const findSongByName = async (name: string) => {
+  const res = await sdk.search(name, ["track"])
+  return res.tracks.items[0].uri;
 }
 
 export const skipNext = async () => {
   return "Skipped to next song";
 }
 
-export const startPlayingSongByLyrics= async (lyrics: string) => {
+export const findSongByLyrics = async (lyrics: string) => {
   try {
-    const songURI = await _findSongByLyrics(lyrics);
-
-    return `Started playing song with lyrics: ${lyrics}`
+    const res = await sdk.search(`lyrics:${lyrics}`, ["track"]);
+    console.log("sad", res.tracks.items[0]);
+    return res.tracks.items[0].name;
   } catch (error) {
     console.error(error);
-    return "Failed to start playing song";
-  }
-}
-
-const _findSongByLyrics = async (lyrics: string) => {
-  try {
-
-  } catch (error) {
-    console.error(error);
+    return "No song found";
   }
 }
